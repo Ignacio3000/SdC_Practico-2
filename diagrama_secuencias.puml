@@ -1,0 +1,32 @@
+@startuml
+participant "Código Python" as Python
+participant "API REST del World Bank" as API
+participant "Código en C" as C
+participant "Subrutina en Ensamblador" as Asm
+
+
+group Solicitud y obtención del índice Gini
+Python -> API: get_gini_info(country, year)
+activate Python
+alt Gini válido
+activate API
+API --> Python: Retorna índice Gini (int)
+else Gini inválido
+API --> Python: Retorna error
+end
+deactivate API
+
+
+Python -> C: Enviar índice Gini (int)
+deactivate Python
+activate C
+C -> Asm: convert_int_to_float(int)
+activate Asm
+Asm --> C: Retorna valor float (gini)
+deactivate Asm
+
+
+C -> Console: Imprimir índice Gini 
+C -> C: Almacenar índice Gini en lista de comparación
+deactivate C
+@enduml

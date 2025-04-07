@@ -12,15 +12,12 @@ def get_gini_info(country, year):
     # verificar si la solicitud fue exitosa
     if response.status_code == 200:   # status code 200 para respuestas existosas
         data = response.json()
-        # imprimir la respuesta formateada para una mejor visualización
-        print(json.dumps(data, indent=2, ensure_ascii=False))
         return data
     else:
         print("Error en la solicitud:", response.status_code)
 
 
-
 gini_info = get_gini_info("ARG","2010"); 
 if gini_info:
-    print(f"{gini_info[1][0]['value']}")
+    print(f"{gini_info[1][0]['value']}") # toma el primer diccionario del segundo elemento de la lista
 
