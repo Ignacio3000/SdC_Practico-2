@@ -3,7 +3,7 @@
 float _int_to_float(int numero_entero){
     float numero_flotante = (float) numero_entero;  //Convertir a flotante
 
-    printf("Flotante: %.2f\n", numero_flotante);
+    printf("Flotante version 2.1: %.2f\n", numero_flotante);
 
     return numero_flotante;
 }
@@ -13,9 +13,15 @@ static PyObject* int_to_float(PyObject* self, PyObject* args){
     int numero_entero;
     if (!PyArg_ParseTuple(args, "i", &numero_entero))
         return NULL;
-    float numero_floant = _int_to_float(numero_entero);
-    return PyFloat_FromDouble(numero_floant);
-   
+    float _float = _int_to_float(numero_entero);
+    //PyFloatObject  *numero_flotante  = PyObject_Malloc(sizeof(PyFloatObject)); 
+    PyFloatObject *numero_flotante = PyObject_New(PyFloatObject, &PyFloat_Type);
+    if (numero_flotante == NULL)
+        return PyErr_NoMemory();
+    
+    numero_flotante->ob_fval = _float;
+    return (PyObject *)numero_flotante;
+
 }
 
 static PyObject* version(PyObject* self)

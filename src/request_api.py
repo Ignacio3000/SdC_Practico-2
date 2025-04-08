@@ -20,5 +20,5 @@ def get_gini_info(country, year):
 gini_info = get_gini_info("ARG","2010"); 
 if gini_info:
     print(f"{gini_info[1][0]['value']}") # toma el primer diccionario del segundo elemento de la lista
- 
-convert_int_to_float.
+
+convert_int_to_float.convertToFloat(5)
