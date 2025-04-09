@@ -1,9 +1,13 @@
 #include <Python.h>
 
+extern int adder(int a, int b);
+
 float _int_to_float(int numero_entero){
     float numero_flotante = (float) numero_entero;  //Convertir a flotante
-
-    printf("Flotante version 2.2: %.2f\n", numero_flotante);
+    int a = 5, b = 3, result;
+    result = adder(a,b);    
+    numero_flotante = numero_flotante + result;
+    printf("Flotante version 3.1: %.2f\n", numero_flotante);
 
     return numero_flotante;
 }
