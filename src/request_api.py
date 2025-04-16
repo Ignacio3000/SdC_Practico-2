@@ -18,9 +18,9 @@ def get_gini_info(country, year):
         print("Error en la solicitud:", response.status_code)
 
 
-
 #breakpoint()
 convert_int_to_float.convertToFloat(5)
+convert_int_to_float.convertToFloatAsm(5)
 
 gini_info = get_gini_info("ARG","2010"); 
 if gini_info:

@@ -1,10 +1,11 @@
 #include <Python.h>
 
 extern int adder(int a, int b);
+extern float convert_to_float(int a);
 
-float _int_to_float(int numero_entero){
-    float numero_flotante = (float) numero_entero;  //Convertir a flotante
-    int a = 5, b = 3, result;
+float to_float_asm(int numero_entero){
+    float numero_flotante = convert_to_float(numero_entero);
+    int a = 10, b = 3, result;
     result = adder(a,b);    
     numero_flotante = numero_flotante + result;
     printf("Flotante version 3.1: %.2f\n", numero_flotante);
@@ -13,11 +14,22 @@ float _int_to_float(int numero_entero){
 }
 
 
-static PyObject* int_to_float(PyObject* self, PyObject* args){
+float to_float(int numero_entero){
+    float numero_flotante = (float) numero_entero;  //Convertir a flotante
+    int a = 10, b = 3, result;
+    result = a + b;
+    numero_flotante = numero_flotante + result;
+    printf("Flotante version 3.1: %.2f\n", numero_flotante);
+
+    return numero_flotante;
+}
+
+
+static PyObject* int_to_float_asm(PyObject* self, PyObject* args){
     int numero_entero;
     if (!PyArg_ParseTuple(args, "i", &numero_entero))
         return NULL;
-    float _float = _int_to_float(numero_entero);
+    float _float = to_float_asm(numero_entero);
     PyFloatObject *numero_flotante = (PyFloatObject *)PyObject_Malloc(sizeof(PyFloatObject));
 
     if (numero_flotante == NULL)
@@ -32,6 +44,21 @@ static PyObject* int_to_float(PyObject* self, PyObject* args){
     return (PyObject *)numero_flotante;
 }
 
+
+static PyObject* int_to_float(PyObject* self, PyObject* args){
+    int numero_entero;
+    if (!PyArg_ParseTuple(args, "i", &numero_entero))
+        return NULL;
+    float _float = to_float(numero_entero);
+    PyFloatObject *numero_flotante = PyObject_New(PyFloatObject, &PyFloat_Type);
+    if (numero_flotante == NULL)
+        return PyErr_NoMemory();
+    
+    numero_flotante->ob_fval = _float;
+    return (PyObject *)numero_flotante;
+}
+
+
 static PyObject* version(PyObject* self)
 {
     return Py_BuildValue("s","Version 0.01");
@@ -39,6 +66,7 @@ static PyObject* version(PyObject* self)
 
 static PyMethodDef convert_int_to_float_Methods[] =
 {
+     {"convertToFloatAsm", int_to_float_asm, METH_VARARGS, "Devuelve un dato de tipo float a partir de un entero"},
      {"convertToFloat", int_to_float, METH_VARARGS, "Devuelve un dato de tipo float a partir de un entero"},
      {"version", (PyCFunction)version, METH_VARARGS, "Devuelve la version del modulo"},
      {NULL, NULL, 0, NULL}
