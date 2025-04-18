@@ -1,7 +1,4 @@
 import requests
-import time
-import json
-
 
 # URL de la API REST del Banco Mundial 
 base_url = "https://api.worldbank.org/v2/country"
@@ -18,19 +15,26 @@ def get_gini_info(country, year):
     else:
         print("Error en la solicitud:", response.status_code)
 
-start_total_time= time.perf_counter() #tomamos el tiempo al inicio dle programa
+def convert_and_add(gini_float):
+    # Convertimos el float a entero y sumamos 1
+    gini_int = int(gini_float) + 1
+    return gini_int
+
+def convert_and_add_million(gini_float):
+    # Convertimos el float a entero y sumamos 1,  un millón de veces
+    for _ in range(1000000):
+        gini_int = int(gini_float) + 1
+    return gini_int
+
 
 gini_info = get_gini_info("ARG","2020"); #tomamos el dato de la api
-
 gini_float = gini_info[1][0]['value']  #guardamos el dato float
 
-start_convertion_time = time.perf_counter() #tomamos el tiempo antes de la conversion
+#Conversion de float a entero +1, con ctypes una sola vez
 
-gini_int = int(gini_float) #convertimos el dato a entero
+#resultado = convert_and_add(gini_float) 
 
-end_time = time.perf_counter() #tomamos el tiempo al final de la conversion
+#Conversion de float a entero +1, con ctypes un millon de veces
+resultado = convert_and_add_million(gini_float) 
 
-print("Valor entero:", gini_int)
-print("Tiempo total de ejecucion:", (end_time - start_total_time ) * 1000 , " mili segundos")
-print("Tiempo de conversion:", (end_time - start_convertion_time ) * 1000 , " mili segundos")
-
+print(resultado)
