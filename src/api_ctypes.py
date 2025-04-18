@@ -33,8 +33,10 @@ gini_float = gini_info[1][0]['value']  #guardamos el dato float
 
 #Conversion de float a entero +1, con ctypes una sola vez
 #resultado = lib.convert_and_add_one_time(gini_float) #llamamos a la funcion de la libreria compartida
+for i in range(1000000):
+    resultado = lib.convert_and_add_one_time(gini_float)
 
 #Conversion de float a entero +1, con ctypes un millon de veces
-resultado = lib.convert_and_add_one_million(gini_float) #llamamos a la funcion de la libreria compartida
+#resultado = lib.convert_and_add_one_million(gini_float) #llamamos a la funcion de la libreria compartida
 
 print(resultado)
