@@ -26,15 +26,19 @@ def convert_and_add_million(gini_float):
         gini_int = int(gini_float) + 1
     return gini_int
 
+def main():
+    gini_info = get_gini_info("ARG","2020"); #tomamos el dato de la api
+    gini_float = gini_info[1][0]['value']  #guardamos el dato float
+    print( convert_and_add(gini_float))
 
-gini_info = get_gini_info("ARG","2020"); #tomamos el dato de la api
-gini_float = gini_info[1][0]['value']  #guardamos el dato float
+
+
 
 #Conversion de float a entero +1, con ctypes una sola vez
 
 #resultado = convert_and_add(gini_float) 
 
 #Conversion de float a entero +1, con ctypes un millon de veces
-resultado = convert_and_add_million(gini_float) 
+#resultado = convert_and_add_million(gini_float) 
 
-print(resultado)
+#print(resultado)

@@ -18,7 +18,7 @@ def get_gini_info(country, year):
         #print("Error en la solicitud:", response.status_code)
 
 
-lib = ctypes.CDLL("./lib_convertion_ctypes.so") #Cargamos la libreria compartida compilada como libreria dinamica .so
+lib = ctypes.CDLL("./build/lib_convertion_ctypes.so") #Cargamos la libreria compartida compilada como libreria dinamica .so
 
 #convert_and_add_one_time es el nombre de la funcion en el .c
 lib.convert_and_add_one_time.argtypes = [ctypes.c_float] # Definimos el tipo de argumento de la función
@@ -34,7 +34,7 @@ gini_float = gini_info[1][0]['value']  #guardamos el dato float
 #Conversion de float a entero +1, con ctypes una sola vez
 #resultado = lib.convert_and_add_one_time(gini_float) #llamamos a la funcion de la libreria compartida
 for i in range(1000000):
-    resultado = lib.convert_and_add_one_time(gini_float)
+    resultado = lib.convert_and_add_one_time(gini_float) 
 
 #Conversion de float a entero +1, con ctypes un millon de veces
 #resultado = lib.convert_and_add_one_million(gini_float) #llamamos a la funcion de la libreria compartida
