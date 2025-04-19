@@ -1,0 +1,7 @@
+README.md
+setup.py
+convert_to_int.egg-info/PKG-INFO
+convert_to_int.egg-info/SOURCES.txt
+convert_to_int.egg-info/dependency_links.txt
+convert_to_int.egg-info/top_level.txt
+src/convert_float_to_int.c

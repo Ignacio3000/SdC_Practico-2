@@ -1,6 +1,6 @@
 import requests
 import json
-import convert_int_to_float
+import convert_to_int
 
 
 # URL de la API REST del Banco Mundial 
@@ -28,4 +28,4 @@ if gini_info:
 gini_info = gini_info[1][0]['value']
 
 int (gini_info);
-print(convert_int_to_float.convertToFloatAsm(5));
+print(convert_to_int.convertToIntAsm(5));
