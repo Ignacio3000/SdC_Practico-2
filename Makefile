@@ -5,8 +5,8 @@ PY_LIB_NAME := convert_int_to_float
 PY_SCRIPT   := api_request.py
 
 C_FILE          := $(SRC_DIR)/convertion.c
-ASM_FILE        := $(SRC_DIR)/adder.asm
-ASM_OBJ_FILE    := $(BUILD_DIR)/adder.o
+ASM_FILE        := $(SRC_DIR)/convert_to_int.asm
+ASM_OBJ_FILE    := $(BUILD_DIR)/convert_to_int.o
 C_OBJ_FILE		:= $(BUILD_DIR)/convertion_ctypes.o
 
 # Reglas
@@ -17,15 +17,24 @@ all:
 	gcc -shared -W -o $(BUILD_DIR)/lib_convertion_ctypes.so $(C_OBJ_FILE)
 	python3 setup.py sdist bdist_wheel
 
-install: all
+install: 
 	pip install . --upgrade
 
 gdb:
 	chmod +x run_gdb.sh
 	./run_gdb.sh 
 
+
+benchmark:
+	PYTHONPATH=. python3 -m perfomance_tests.benchmark
+	
+compare:
+	pyperf compare_to --table  python_converter.json ctypes_converter.json
+
 clean:
 	sudo rm -rf $(BUILD_DIR) *.egg-info __pycache__ dist
+	rm  -f ctypes_converter.json
 
 
 .PHONY: all install clean
+

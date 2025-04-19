@@ -1,4 +1,6 @@
+
 import requests
+import convert_float_to_int
 
 def get_gini_info(country, year):
     url = f"https://api.worldbank.org/v2/country/{country}/indicator/SI.POV.GINI?date={year}&format=json"
@@ -11,20 +13,18 @@ def get_gini_info(country, year):
 
 def convert_and_add(gini_float):
     # Convertimos el float a entero y sumamos 1
-    gini_int = int(gini_float) + 1
-    return gini_int
+    gini_int = convert_float_to_int.convertToIntAsm(gini_float) 
+    return gini_int 
 
 def convert_and_add_million(gini_float):
     # Convertimos el float a entero y sumamos 1,  un millón de veces
-    for _ in range(1000000):
-        gini_int = int(gini_float) + 1
-    return gini_int
+    gini_int = convert_float_to_int.convertToIntAsmMil(gini_float) 
+    return gini_int 
 
 def main():
     gini_float = get_gini_info("ARG","2020"); #tomamos el dato de la api
     resultado = convert_and_add(gini_float) 
     print(resultado)
 
-
-
+main()
 

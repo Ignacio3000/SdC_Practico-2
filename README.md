@@ -11,4 +11,3 @@ IMPORTANTE: en esta segunda iteración deberán mostrar los resultados con gdb, 
 
 
 Casos de prueba, diagramas de bloques, diagrama de secuencia, pruebas de performance para comparar c y python son bienvenidos, profiling de la app de c es un plus.
-
