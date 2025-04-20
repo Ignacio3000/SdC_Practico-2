@@ -5,22 +5,22 @@ import random
 
 from src.scripts import api_only_python, api_ctypes, api_c_asm
 
-PY_BENCH      = False
+PY_BENCH      = True
 CTYPES_BENCH  = False
-ASM_BENCH     = True
+ASM_BENCH     = False
 
 
 def bench_asm():
     #api_c_asm.main()
-    api_c_asm.convert_and_add(1)
+    api_c_asm.convert_and_add_million(1)
 
 def bench_python():
     #api_only_python.main()
-    api_only_python.convert_and_add(1)
+    api_only_python.convert_and_add_million(1)
 
 def bench_ctypes():
     #api_ctypes.main()
-    api_ctypes.convert_and_add(1)
+    api_ctypes.convert_and_add_million(1)
 
 
 runner = pyperf.Runner()

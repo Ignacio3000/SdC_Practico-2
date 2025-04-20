@@ -21,19 +21,17 @@ install:
 	pip install . --upgrade
 
 gdb:
-	chmod +x run_gdb.sh
-	./run_gdb.sh 
-
+	gdb -q --args  python3-dbg src/scripts/api_c_asm.py
 
 benchmark:
 	PYTHONPATH=. python3 -m perfomance_tests.benchmark
 	
 compare:
-	pyperf compare_to --table  python_converter.json ctypes_converter.json
+	pyperf compare_to --table  python_converter.json ctypes_converter.json asm_converter.json
 
 clean:
 	sudo rm -rf $(BUILD_DIR) *.egg-info __pycache__ dist
-	rm  -f ctypes_converter.json
+	rm  -f ctypes_converter.json asm_converter.json python_converter.json
 
 
 .PHONY: all install clean
