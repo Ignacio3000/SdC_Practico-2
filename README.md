@@ -54,7 +54,7 @@ En la raíz del proyecto, ejecute:
 make all
 ```
 
-Esta regla realiza:
+Esta regla:
 
 - Crea la carpeta `build/`.
 - Ensambla `convert_to_int.asm` → `build/convert_to_int.o`.
