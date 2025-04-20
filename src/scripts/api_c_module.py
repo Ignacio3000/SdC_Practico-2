@@ -1,4 +1,4 @@
-import convertion_float_to_int
+import float_to_int_c
 import requests
 
 
@@ -22,14 +22,14 @@ gini_info = get_gini_info("ARG","2020");
 gini_float = gini_info[1][0]['value']  #guardamos el dato float
 
 #Una sola operacion
-#resultado = convertion_float_to_int.convert_and_add_one_time(gini_float)  
+#resultado = conversion_float_to_int.convert_and_add_one_time(gini_float)  
 
 for i in range(1000000):
-    resultado = convertion_float_to_int.convert_and_add_one_time(gini_float)
+    resultado = float_to_int_c.convert_and_add_one_time(gini_float)
        
 
 #Un millon de operaciones
-#resultado= convertion_float_to_int.convert_and_add_one_million(gini_float)
+#resultado= conversion_float_to_int.convert_and_add_one_million(gini_float)
 
 
 print(resultado)
