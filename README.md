@@ -42,7 +42,7 @@ Este trabajo práctico consiste en recuperar el índice GINI de un país (por de
 Instalar en Ubuntu/Debian:
 
 ```bash
-sudo apt update && sudo apt install -y nasm gcc python3-dev python3-pip python3-pyperf
+sudo apt update && sudo apt install -y nasm gcc python3-dev python3-pip python3-pyperf && pip3 install --user setuptools
 ```
 
 ---
@@ -107,10 +107,13 @@ Dentro de `perfomance_tests/benchmark.py` se usa `pyperf` para medir el desempe�
 
 1. Configure qué benchs activar (variables `PY_BENCH`, `CTYPES_BENCH`, `ASM_BENCH`).
 2. Ejecute:
+
    ```bash
    make benchmark
    ```
+> **Nota**: Ejecutar tres veces, una para cada variable activa).
 3. Compare resultados:
+
    ```bash
    make compare
    ```
