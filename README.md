@@ -18,6 +18,7 @@ Este trabajo práctico consiste en recuperar el índice GINI de un país (por de
 .
 ├── build/                # Objetos y librerías construidos
 ├── dist/                 # Distribuciones generadas (wheel, sdist)
+├── my_wrappers.egg-info/ # Metadata del paquete (PKG-INFO, SOURCES.txt, dependency_links.txt, top_level.txt)
 ├── perfomance_tests/     # Benchmarks y scripts de pyperf
 ├── src/                  # Código fuente y scripts Python
 │   ├── c_src/            # C y ASM para wrappers
