@@ -34,7 +34,7 @@ int to_int(float numero_float){
  * @param args   Tupla con los argumentos pasados desde Python.
  * @return PyObject* apuntando al objecto py de tipo float o NULL con excepción.
  */
-static PyObject* float_to_int_asm(PyObject* self, PyObject* args){
+static PyObject* _float_to_int_asm(PyObject* self, PyObject* args){
     float numero_float;
     // Extrae un entero de la tupla de argumentos
     if (!PyArg_ParseTuple(args, "f", &numero_float)) {
@@ -61,7 +61,7 @@ static PyObject* float_to_int_asm(PyObject* self, PyObject* args){
  * @return PyObject* apuntando al objecto py de tipo float o NULL con excepción.
  */
 
-static PyObject* float_to_int_asm_mil(PyObject* self, PyObject* args){
+static PyObject* _float_to_int_asm_mil(PyObject* self, PyObject* args){
     double numero_double;
     // Extrae un entero de la tupla de argumentos
     if (!PyArg_ParseTuple(args, "d", &numero_double)) { //Los numeros decimales de Python son double
@@ -87,7 +87,7 @@ static PyObject* float_to_int_asm_mil(PyObject* self, PyObject* args){
  * @param args   Tupla con los argumentos pasados desde Python.
  * @return PyObject* apuntando al objeto py de tipo int o NULL con excepción.
  */
-static PyObject* float_to_int(PyObject* self, PyObject* args) {
+static PyObject* _float_to_int(PyObject* self, PyObject* args) {
     float numero_float;
 
     // Extrae un float de la tupla de argumentos
@@ -112,11 +112,11 @@ static PyObject* float_to_int(PyObject* self, PyObject* args) {
  * - Tipo de argumentos aceptados (METH_VARARGS: recibe tupla de argumentos).
  * - Cadena de documentación del método.
  */
-static PyMethodDef convert_float_to_int_Methods[] =
+static PyMethodDef float_to_int_asm_Methods[] =
 { 
-    {"convertToIntAsm", float_to_int_asm, METH_VARARGS, "Convierte un flotante a entero utilizando ensamblador."},
-    {"convertToIntAsmMil", float_to_int_asm_mil, METH_VARARGS, "Convierte un flotante a entero utilizando ensamblador, sumando 1 mil veces."},  
-    {"convertToInt", float_to_int, METH_VARARGS, "Convierte un flotante a entero utilizando C puro."},
+    {"convertToIntAsm", _float_to_int_asm, METH_VARARGS, "Convierte un flotante a entero utilizando ensamblador."},
+    {"convertToIntAsmMil", _float_to_int_asm_mil, METH_VARARGS, "Convierte un flotante a entero utilizando ensamblador, sumando 1 mil veces."},  
+    {"convertToInt", _float_to_int, METH_VARARGS, "Convierte un flotante a entero utilizando C puro."},
     {NULL, NULL, 0, NULL} /* Marca el final de la lista */
 };
 
@@ -127,10 +127,10 @@ static PyMethodDef convert_float_to_int_Methods[] =
 static struct PyModuleDef convertionmod =
 {
      PyModuleDef_HEAD_INIT,
-     "convert_float_to_int", /* Nombre del módulo */
+     "float_to_int_asm", /* Nombre del módulo */
      "convertir flotante a entero",  /* Documentación del módulo */         
      -1,                         /* Tamaño del estado (módulos sin estado usan -1) */
-     convert_float_to_int_Methods  /* Tabla de métodos */
+     float_to_int_asm_Methods  /* Tabla de métodos */
 };
 
 /**
@@ -138,7 +138,7 @@ static struct PyModuleDef convertionmod =
  *
  * Llamado al importar el módulo en Python.
  */
-PyMODINIT_FUNC PyInit_convert_float_to_int(void)
+PyMODINIT_FUNC PyInit_float_to_int_asm(void)
 {
     return PyModule_Create(&convertionmod);
 }

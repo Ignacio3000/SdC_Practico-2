@@ -27,7 +27,7 @@ static PyObject* py_convert_and_add_one_million(PyObject* self, PyObject* args) 
 }
 
 // Lista de métodos expuestos le dice a Python qué funciones exporta el módulo, con sus nombres y descripciones.
-static PyMethodDef convertion_float_to_int_Methods[] = {
+static PyMethodDef float_to_int_c_Methods[] = {
     {"convert_and_add_one_time", py_convert_and_add_one_time, METH_VARARGS, "Convierte y suma una vez"},
     {"convert_and_add_one_million", py_convert_and_add_one_million, METH_VARARGS, "Convierte y suma un millón de veces"},
     {NULL, NULL, 0, NULL}
@@ -36,13 +36,13 @@ static PyMethodDef convertion_float_to_int_Methods[] = {
 // Definición del módulo función especial que se llama cuando se hace import convertion_float_to_int desde Python.
 static struct PyModuleDef convertion_float_to_int_definition = {
     PyModuleDef_HEAD_INIT,
-    "convertion_float_to_int_",
+    "convertion_float_to_int",
     "Módulo que envuelve funciones en C para sumar enteros",
     -1,
-    convertion_float_to_int_Methods
+    float_to_int_c_Methods
 };
 
 // Inicializador del módulo
-PyMODINIT_FUNC PyInit_convertion_float_to_int(void) {
+PyMODINIT_FUNC PyInit_float_to_int_c(void) {
     return PyModule_Create(&convertion_float_to_int_definition);
 }

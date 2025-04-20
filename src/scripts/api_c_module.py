@@ -1,35 +1,29 @@
-import float_to_int_c
+# api_c_module.py
 import requests
-
-
-
-# URL de la API REST del Banco Mundial 
-base_url = "https://api.worldbank.org/v2/country"
+import float_to_int_c
 
 def get_gini_info(country, year):
-    url = f"{base_url}/{country}/indicator/SI.POV.GINI?date={year}&format=json"
+    url = f"https://api.worldbank.org/v2/country/{country}/indicator/SI.POV.GINI?date={year}&format=json"
     response = requests.get(url)
-    # verificar si la solicitud fue exitosa
-    if response.status_code == 200:   # status code 200 para respuestas existosas
+    if response.status_code == 200:
         data = response.json()
-        # imprimir la respuesta formateada para una mejor visualización
-    #    print(json.dumps(data, indent=2, ensure_ascii=False))
-        return data
-   # else:
-        #print("Error en la solicitud:", response.status_code)
+        return data[1][0]['value']
+    else:
+        return None
 
-gini_info = get_gini_info("ARG","2020"); 
-gini_float = gini_info[1][0]['value']  #guardamos el dato float
+def convert_and_add(gini_float):
+    # Convertimos el float a entero y sumamos 1
+    gini_int = float_to_int_c.convert_and_add_one_time(gini_float)
+    return gini_int
 
-#Una sola operacion
-#resultado = conversion_float_to_int.convert_and_add_one_time(gini_float)  
+def convert_and_add_million(gini_float):
+    # Convertimos el float a entero y sumamos 1 un millón de veces
+    gini_int = float_to_int_c.convert_and_add_one_million(gini_float)
+    return gini_int
 
-for i in range(1000000):
-    resultado = float_to_int_c.convert_and_add_one_time(gini_float)
-       
+def main():
+    gini_float = get_gini_info("ARG", "2020")  # Tomamos el dato de la API
+    resultado = convert_and_add(gini_float)    # Prueba con una sola operación
+    print(resultado)
 
-#Un millon de operaciones
-#resultado= conversion_float_to_int.convert_and_add_one_million(gini_float)
-
-
-print(resultado)
+main()
