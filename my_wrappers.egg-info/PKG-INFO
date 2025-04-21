@@ -1,10 +1,5 @@
-Metadata-Version: 2.1
-Name: my-wrappers
+Metadata-Version: 2.4
+Name: my_wrappers
 Version: 0.1.0
 Summary: Dos wrappers C para Python
-Home-page: UNKNOWN
-License: UNKNOWN
-Platform: UNKNOWN
-
-UNKNOWN
-
+Dynamic: summary

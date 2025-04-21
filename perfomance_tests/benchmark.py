@@ -1,13 +1,10 @@
-import os
 import pyperf
-import convert_int_to_float
-import random
 
 from src.scripts import api_only_python, api_ctypes, api_c_asm
 
-PY_BENCH      = True
+PY_BENCH      = False
 CTYPES_BENCH  = False
-ASM_BENCH     = False
+ASM_BENCH     = True
 
 
 def bench_asm():

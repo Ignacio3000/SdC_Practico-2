@@ -8,7 +8,7 @@ convert_to_int_asm = Extension(
     extra_link_args=[]                           
 )
 
-conversion_float_to_int = Extension(
+convert_to_int_c = Extension(
     'float_to_int_c',
     sources=['src/c_src/wrapper.c', 'src/c_src/convertion.c'],
     extra_compile_args=['-g', '-O3', '-fPIC'],
@@ -21,6 +21,6 @@ setup(
     description='Dos wrappers C para Python',
     ext_modules=[
         convert_to_int_asm,
-        conversion_float_to_int,
+        convert_to_int_c,
     ],
 )
